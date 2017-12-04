@@ -1,0 +1,46 @@
+<header>
+        <nav class="navbar navbar-default">
+            <div class="container" >
+                <div class="navbar-header"  >
+                    <a class="navbar-brand" href="#/"> Liepājas Sporta Informācijas Sistēma </a>
+                </div>
+    
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#/"><i class="fa fa-home"> Sākums </i> </a></li>
+                    <li><a href="#/gameListPublic"><i class="fa fa-home"> Spēles </i> </a></li>
+                    <li ng-if="isUserLoggedIn"><a href="#/adminMenu"><i class="fa fa-home"> Administrēšanas funkcijas </i> </a></li>
+                    <li ng-if="!isUserLoggedIn"><a href="#/login"><i class="fa fa-home"> Autentificēties </i> </a></li>
+                    <li ng-if="isUserLoggedIn"><a href="#/logout"><i class="fa fa-home"> Izlogoties </i> </a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+
+<div  class="row smallContainer" ng-init="checkUserRights();getSportList()" >
+    Sporta veids:
+    <select name="sportSelect" id="sportSelect" ng-model="team.sport" >
+            <option value="">Izvēlies sporta veidu</option>
+            <!-- <option selected ng-if="sportlist[0] !== undefined"  value="sportlist[0]._id">{{sportlist[0].sport_name}}</option>             -->
+            <option  ng-repeat="s in sportlist track by $index" value="{{s._id}}">{{s.sport_name}} </option>   
+    </select>
+    </br>
+
+    <a href="" ng-click="addNewTeam()" ><i class="fa fa-home"> Pievienot jaunu komandu </i> </a>
+
+    <table border="1" ng-init="getTeamList()" class="table table-striped">
+        <tr>
+            <th> Komandas nosaukums </th>
+            <th> Treneri </th>
+            <th> </th>
+            <th> </th>
+        </tr>
+        <tr ng-repeat="u in teamlist | filter:{sport: team.sport != '' ? team.sport : 'empty'}:false">
+            <td>{{u.team_name}}</td>
+            <td>{{u.coaches}}</td>
+            <td> <a href="" ng-click="deleteTeam(u._id)"> Dzēst </a></td>
+            <td> <a href="" ng-click="editTeam(u)"> Labot </a> </td>
+        </tr>
+    </table>
+</div>
+

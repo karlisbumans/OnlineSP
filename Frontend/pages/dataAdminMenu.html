@@ -1,0 +1,33 @@
+<link rel="stylesheet" href="css/bootstrap.min.css" />
+<link rel="stylesheet" href="css/style.css" />    
+<header>
+        <nav class="navbar navbar-default">
+            <div class="container" >
+                <div class="navbar-header"  >
+                    <a class="navbar-brand" href="#/"> Liepājas Sporta Informācijas Sistēma </a>
+                </div>
+    
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#/"><i class="fa fa-home"> Sākums </i> </a></li>
+                    <li><a href="#/gameListPublic"><i class="fa fa-home"> Spēles </i> </a></li>
+                    <li ng-if="isUserLoggedIn"><a href="#/adminMenu"><i class="fa fa-home"> Administrēšanas funkcijas </i> </a></li>
+                    <li ng-if="!isUserLoggedIn"><a href="#/login"><i class="fa fa-home"> Autentificēties </i> </a></li>
+                    <li ng-if="isUserLoggedIn"><a href="#/logout"><i class="fa fa-home"> Izlogoties </i> </a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+<nav class="navbar navbar-default" >
+    <div class="container" ng-if="isUserLoggedIn" >
+        <ul class="nav navbar-nav navbar-down">
+            <li><a href="#/sportList"><i class="fa fa-home"> Sporta veidi </i> </a></li>
+            <li><a href="#/teamList"><i class="fa fa-home"> Komandas </i> </a></li>
+            <li><a href="#/gameList"><i class="fa fa-home"> Spēles </i> </a></li>
+          
+        </ul>
+    </div>
+    <div ng-if="! isUserLoggedIn">
+        Jums jāautentificējas, lai būtu pieejamas administrēšanas: dataAdminMenu.html
+    </div>
+</nav>

@@ -1,0 +1,20 @@
+{
+  "name": "LSISbackend",
+  "version": "1.0.0",
+  "description": "Liepājas Sporta Informācijas Sistēma: Backend",
+  "main": "server.js",
+  "author": "Kārlis Būmans",
+  "test": "echo \"Error: no test specified\" && exit 1",
+  "start": "node server.js",
+  "dependencies": {
+    "body-parser": "^1.4.3",
+    "cors": "^2.8.4",
+    "express": "^4.13.4",
+    "method-override": "^2.1.3",
+    "mongodb": "^2.2.33",
+    "mongoose": "^4.4.12",
+    "morgan": "^1.1.1",
+    "nconf": "^0.9.1",
+    "underscore": "^1.8.3"
+  }
+}

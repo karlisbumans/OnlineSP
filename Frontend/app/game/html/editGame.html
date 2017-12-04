@@ -1,0 +1,107 @@
+
+<header>
+        <nav class="navbar navbar-default">
+            <div class="container" >
+                <div class="navbar-header"  >
+                    <a class="navbar-brand" href="#/"> Liepājas Sporta Informācijas Sistēma </a>
+                </div>
+    
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#/"><i class="fa fa-home"> Sākums </i> </a></li>
+                    <li><a href="#/gameListPublic"><i class="fa fa-home"> Spēles </i> </a></li>
+                    <li ng-if="isUserLoggedIn"><a href="#/adminMenu"><i class="fa fa-home"> Administrēšanas funkcijas </i> </a></li>
+                    <li ng-if="!isUserLoggedIn"><a href="#/login"><i class="fa fa-home"> Autentificēties </i> </a></li>
+                    <li ng-if="isUserLoggedIn"><a href="#/logout"><i class="fa fa-home"> Izlogoties </i> </a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+<div class="row smallContainer" >
+    <div class="col-md-12">
+        <h2 class="panel-title">Sporta spēles protokola pievienošana/rediģēšana:</h2>
+     
+        <div class="panel panel-default" >
+            <div class="panel-heading">
+                <h3 class="panel-title">Pamatdati:</h3>
+            </div>
+
+            <div class="form-group" ng-init="checkUserRights();getSportList();getTeamList();refreshPage()">
+                Sporta veids:
+                <select name="sportSelect" id="sportSelect" ng-model="game.sport" ng-change="sportChange()">
+                    <option ng-repeat="s in sportlist" value="{{s._id}}">{{s.sport_name}}</option>
+                </select>
+                <br/>
+
+                Mājinieku komanda:
+                <select name="teamSelect1" id="teamSelect1" ng-model="game.team1" >
+                    <option ng-repeat='t in teamlist | filter:{sport:game.sport}:false' value="{{t._id}}">{{t.team_name}}</option>
+                </select>
+                <br/>
+                Viesu komanda:
+                <select name="teamSelect2" id="teamSelect2" ng-model="game.team2" >
+                    <option ng-repeat='t in teamlist | filter:{sport:game.sport}:false' value="{{t._id}}">{{t.team_name}}</option>
+                </select>
+                <br/>
+
+                Datums un laiks: <input type="text" ng-model="game.date" class="form-control" />
+                Rezultāts mājniekiem: <input type="text" ng-model="game.score1" class="form-control" />
+                Rezultāts viesiem: <input type="text" ng-model="game.score2" class="form-control" />
+            </div>
+            <div  class="row smallContainer">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Spēles notikumi:</h3>
+                            </div>
+                            <table >
+                                <tr>
+                                    <th> Laiks  </th>
+                                    <th> Komanda </th>
+                                    <th> Notikums </th>
+                                    <th> Spēletājs </th>
+                                    <th> komentārs </th>
+                                    <th></th>
+                                </tr>
+        
+                                <tr ng-repeat="e in game.events">
+                                    <td>
+                                        <input type="text" ng-model="game.events[$index].time" class="form-horizontal" />
+                                    </td>
+                                    <td>
+                                        <select name="teamSelectInline" id="teamSelectInline" ng-model="game.events[$index].team" >
+                                            <option ng-repeat='t in teamlist | filter:filterTeamsInline:false' value="{{t._id}}">{{t.team_name}}</option>
+                                        </select>
+                                     </td>
+                                    <td>
+                                        <select name="teamEventType" id="teamEventType" ng-model="game.events[$index].event_type" ng-change="calculateScore()" >
+                                            <option ng-repeat="e in getEventTypeList(game.sport)" value="{{e._id}}">{{e.name}}</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select name="selectPlayer" id="selectPlayer" ng-model="game.events[$index].player" >
+                                            <option ng-repeat="p in getPlayerList(game.events[$index].team)" value="{{p._id}}">{{p.player_number + ": " + p.name + " " + p.surname}}</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="game.events[$index].comment" class="form-horizontal" />
+                                    </td>
+                                    <td>
+                                        <a href="" ng-click="deleteEvent($index)"> dzēst </a>
+                                    </td>
+                                </tr>
+                            </table>
+                            <a href="" ng-click="addEvent('')" >pievienot jaunu</a>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-default" ng-click="updateGame()"> Saglabāt </button>
+                <button type="button" class="btn btn-default" ng-click="backToList()"> Iziet </button>
+        
+            </div>
+        </div>
+        
+
+        </div>
+
+       

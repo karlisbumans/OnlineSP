@@ -1,0 +1,34 @@
+db.users.insert(
+{
+    "username" : "karlis",
+    "password" : "k",
+    "name": "Kārlis",
+    "surbame": "Būmanis"
+}
+)
+
+db.sports.insert(
+{
+    "sport_name" : "futbols",
+    "game_length" : "90",
+    "events": [{"name": "varti"}, {"name": "sarkana kartina"}, {"name": "dzeltena kartina"} ]
+}
+)
+
+db.sports.insert(
+{
+    "sport_name" : "hokejs",
+    "game_length" : "60",
+    "events": [{"name": "varti"}, {"name": "noraidijums 2 min"}, {"name": "noraidijums 5 min"} ]
+}
+)
+
+db.sports.insert(
+{
+    "sport_name" : "florbols",
+    "game_length" : "60",
+    "events": [{"name": "varti"}, {"name": "noraidijums 2 min"}, {"name": "noraidijums 5 min"} ]
+}
+)
+
+

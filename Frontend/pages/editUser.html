@@ -1,0 +1,35 @@
+<link rel="stylesheet" href="css/bootstrap.min.css" />
+<link rel="stylesheet" href="css/style.css" />    
+<header>
+        <nav class="navbar navbar-default">
+            <div class="container" >
+                <div class="navbar-header"  >
+                    <a class="navbar-brand" href="#/"> Liepājas Sporta Informācijas Sistēma </a>
+                </div>
+    
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#/"><i class="fa fa-home"> Sākums </i> </a></li>
+                    <li><a href="#/gameListPublic"><i class="fa fa-home"> Spēles </i> </a></li>
+                    <li ng-if="isUserLoggedIn"><a href="#/adminMenu"><i class="fa fa-home"> Administrēšanas funkcijas </i> </a></li>
+                    <li ng-if="!isUserLoggedIn"><a href="#/login"><i class="fa fa-home"> Autentificēties </i> </a></li>
+                    <li ng-if="isUserLoggedIn"><a href="#/logout"><i class="fa fa-home"> Izlogoties </i> </a></li>
+                </ul>
+            </div>
+        </nav>
+</header>
+
+<div class="row" ng-init="checkUserRights()">
+    <div class="col-md-6 col-md-offset-3">
+        <h4> Labot lietotāja datus: </h4>
+        <div class="form-group" ng-init="refreshPage()">
+            Lietotājvārds: <input type="text" ng-model="lietotajs.username" class="form-control" />
+            Parole: <input type="password" ng-model="lietotajs.password" class="form-control" />
+            Vārds: <input type="text" ng-model="lietotajs.name" class="form-control" />
+            Uzvārds: <input type="text" ng-model="lietotajs.surname" class="form-control" />
+
+        </div>
+        <button type="button" class="btn btn-default" ng-click="updateUser()"> Labot datus </button>
+
+
+    </div>
+</div>

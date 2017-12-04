@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="LSIS">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title> Liepājas Sporta Informācijas Sistēma </title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />    
+    <script src="Library/angular.min.js"> </script>
+    <script src="Library/angular-route.min.js"> </script>
+    <script src="Library/angular-resource.min.js"> </script>
+    <script src="app.js"> </script>
+
+    <!----------------------Users-------------------->
+    <script src="routes.js"> </script>
+    <script src="services.js"> </script>
+    <script src="controllers.js"> </script>
+    <script src="directives.js"> </script>
+
+    <!----------------------Sport-------------------->
+    <script src="app/sport/sport.routes.js"></script>
+    <script src="app/sport/services/sportService.js"></script>
+    <script src="app/sport/controller/sportController.js"></script>
+
+    <!----------------------Team-------------------->
+    <script src="app/team/team.routes.js"></script>
+    <script src="app/team/services/teamService.js"></script>
+    <script src="app/team/controller/teamController.js"></script>
+
+    <!----------------------Game-------------------->
+    <script src="app/game/game.routes.js"></script>
+    <script src="app/game/services/gameService.js"></script>
+    <script src="app/game/controller/gameController.js"></script>
+
+</head>
+<body>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="Library/jquery-min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"></script>
+
+
+
+
+
+
+<div class="fullContainer">
+        <div ng-view></div>
+</div>
+
+</body>
+
+</html>

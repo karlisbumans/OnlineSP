@@ -1,0 +1,70 @@
+<link rel="stylesheet" href="css/bootstrap.min.css" />
+<link rel="stylesheet" href="css/style.css" />    
+<header>
+        <nav class="navbar navbar-default">
+            <div class="container" >
+                <div class="navbar-header"  >
+                    <a class="navbar-brand" href="#/"> Liepājas Sporta Informācijas Sistēma </a>
+                </div>
+    
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#/"><i class="fa fa-home"> Sākums </i> </a></li>
+                    <li><a href="#/gameListPublic"><i class="fa fa-home"> Spēles </i> </a></li>
+                    <li ng-if="isUserLoggedIn"><a href="#/adminMenu"><i class="fa fa-home"> Administrēšanas funkcijas </i> </a></li>
+                    <li ng-if="!isUserLoggedIn"><a href="#/login"><i class="fa fa-home"> Autentificēties </i> </a></li>
+                    <li ng-if="isUserLoggedIn"><a href="#/logout"><i class="fa fa-home"> Izlogoties </i> </a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+
+
+<div class="row smallContainer" >
+    <div class="col-md-6 col-md-offset-3">
+       
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Pamatdati:</h3>
+            </div>
+            <div class="form-group" ng-init="checkUserRights();refreshPage()">
+                Sporta veida nosaukums: <input type="text" ng-model="sport.sport_name" class="form-control" />
+                Periodu skaits:    <input type="text" ng-model="sport.period_count" class="form-control" />
+                Perioda ilgums (min):    <input type="text" ng-model="sport.period_length" class="form-control" />
+            </div>
+        </div>
+
+        <div class="row" >
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Notikumu veidi:</h3>
+                    </div>
+                    <table >
+                        <tr>
+                            <th> Notikuma nosaukums  </th>
+                            <th>  Par cik palielinās rezultāts</th>
+                            <th></th>
+                        </tr>
+
+                        <tr ng-repeat="e in sport.events">
+                            <td>
+                                <input type="text" ng-model="sport.events[$index].name" class="form-horizontal" />
+                            </td>
+                            <td>
+                                <input type="text" ng-model="sport.events[$index].score_change" class="form-horizontal" />
+                            </td>
+                            <td>
+                                <a href="" ng-click="deleteEvent($index)"> dzēst </a>
+                            </td>
+                        </tr>
+                    </table>
+                    <a href="" ng-click="addEvent('')">pievienot jaunu</a>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-default" ng-click="updateSport()"> Saglabāt </button>
+        <button type="button" class="btn btn-default" ng-click="backToList()"> Atcelt </button>
+
+    </div>
+</div>

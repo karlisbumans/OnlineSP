@@ -1,0 +1,102 @@
+<link rel="stylesheet" href="css/bootstrap.min.css" />
+<link rel="stylesheet" href="css/style.css" />    
+<header>
+        <nav class="navbar navbar-default">
+            <div class="container" >
+                <div class="navbar-header"  >
+                    <a class="navbar-brand" href="#/"> Liepājas Sporta Informācijas Sistēma </a>
+                </div>
+    
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#/"><i class="fa fa-home"> Sākums </i> </a></li>
+                    <li><a href="#/gameListPublic"><i class="fa fa-home"> Spēles </i> </a></li>
+                    <li ng-if="isUserLoggedIn"><a href="#/adminMenu"><i class="fa fa-home"> Administrēšanas funkcijas </i> </a></li>
+                    <li ng-if="!isUserLoggedIn"><a href="#/login"><i class="fa fa-home"> Autentificēties </i> </a></li>
+                    <li ng-if="isUserLoggedIn"><a href="#/logout"><i class="fa fa-home"> Izlogoties </i> </a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+<div class="row smallContainer" >
+    <div class="col-md-12">
+        <h2 class="panel-title">Spēles protokols:</h2>
+        <hr/>
+        <div class="panel panel-default" >
+            <div class="panel-heading">
+                <h3 class="panel-title">Pamatdati:</h3>
+            </div>
+
+            <div class="form-group" ng-init="getSportList();getTeamList();refreshPage();initPage()">
+                Sporta veids:
+                <label ng-repeat="s in sportlist" ng-if="s._id == game.sport">
+                    {{s.sport_name}}
+                </label>
+                <br/>
+
+                <table class="table table-striped" style="width:100%"  >
+                    <tr>
+                        <td width="40%" align="center" valign="center">
+                            <h2 ng-repeat="t in teamlist | filter:{sport:game.sport}:false" ng-if="t._id == game.team1">
+                                {{t.team_name}}
+                            </h2>
+                        </td>
+                        <td width="10%" align="center" valign="center">
+                            <h1>{{game.score1}}</h1>
+                        </td>
+                        <td width="10%" align="center" valign="center">
+                            <h1>{{game.score2}}</h1>
+                        </td>
+                        <td width="40%" align="center" valign="center">
+                            <h2 ng-repeat="t in teamlist | filter:{sport:game.sport}:false" ng-if="t._id == game.team2">
+                                {{t.team_name}}
+                            </h2>
+                        </td>
+
+                    </tr>
+                </table>
+                <br/>
+                Laiks: <label>{{game.date}}</label>
+            </div>
+        </div>
+
+        <div  class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Spēles notikumi:</h3>
+                    </div>
+                    <table class="table table-striped">
+                        <tr>
+                            <th> Laiks </th>
+                            <th> Komanda</th>
+                            <th> Notikums</th>
+                            <th> Spēletājs</th>
+                            <th> komentārs</th>
+                        </tr>
+
+                        <tr ng-repeat="e in game.events">
+                            <td>
+                               {{game.events[$index].time}}
+                            </td>
+                            <td>
+                                {{getTeamName(game.events[$index].team)}} <br/>
+                            </td>
+                            <td>
+                                {{ getEventName(game.sport, game.events[$index].event_type) }}
+                            </td>
+                            <td>
+                                {{getPlayerDescription(game.events[$index].team, game.events[$index].player)}}
+                            </td>
+                            <td>
+                                {{game.events[$index].comment}}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-default" ng-click="getGame()"> Atsvaidzināt </button>
+        <button type="button" class="btn btn-default" ng-click="backToListPublic()"> Atcelt </button>
+
+    </div>
+</div>

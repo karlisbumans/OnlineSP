@@ -1,0 +1,81 @@
+<header>
+        <nav class="navbar navbar-default">
+            <div class="container" >
+                <div class="navbar-header"  >
+                    <a class="navbar-brand" href="#/"> Liepājas Sporta Informācijas Sistēma </a>
+                </div>
+    
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#/"><i class="fa fa-home"> Sākums </i> </a></li>
+                    <li><a href="#/gameListPublic"><i class="fa fa-home"> Spēles </i> </a></li>
+                    <li ng-if="isUserLoggedIn"><a href="#/adminMenu"><i class="fa fa-home"> Administrēšanas funkcijas </i> </a></li>
+                    <li ng-if="!isUserLoggedIn"><a href="#/login"><i class="fa fa-home"> Autentificēties </i> </a></li>
+                    <li ng-if="isUserLoggedIn"><a href="#/logout"><i class="fa fa-home"> Izlogoties </i> </a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+
+<div class="row smallContainer" >
+    <div class="col-md-6 col-md-offset-3">
+      
+        <hr/>
+        <div class="panel panel-default">
+            <div class="panel-heading" ng-init="checkUserRights();getSportList()" >
+                <h3 class="panel-title">Pamatdati:</h3>
+            </div>
+            <div class="form-group" ng-init="refreshPage()">
+
+                Sporta veids:
+                <select name="repeatSelect" id="repeatSelect" ng-model="team.sport">
+                    <option ng-repeat="s in sportlist" value="{{s._id}}">{{s.sport_name}}</option>
+                </select>
+                <br/>
+
+                Komandas nosaukums: <input type="text" ng-model="team.team_name" class="form-control" />
+                Treneri:    <input type="text" ng-model="team.coaches" class="form-control" />
+            </div>
+        </div>
+
+
+
+
+
+        <div class="row" >
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Spēlētāju saraksts:</h3>
+                    </div>
+                    <table >
+                        <tr>
+                            <th>Vārds</th>
+                            <th>Uzvārds</th>
+                            <th>Spēlētāja numurs</th>
+                            <th></th>
+                        </tr>
+                        <tr ng-repeat="e in team.players">
+                            <td>
+                                <input type="text" ng-model="team.players[$index].name" class="form-horizontal" />
+                            </td>
+                            <td>
+                                <input type="text" ng-model="team.players[$index].surname" class="form-horizontal" />
+                            </td>
+                            <td>
+                                <input type="text" ng-model="team.players[$index].player_number" class="form-horizontal" />
+                            </td>
+                            <td>
+                                <a href="" ng-click="deletePlayer($index)"> dzēst </a>
+                            </td>
+                        </tr>
+                    </table>
+                    <a href="" ng-click="addPlayer('')">pievienot jaunu</a>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-default" ng-click="updateTeam()"> Saglabāt </button>
+        <button type="button" class="btn btn-default" ng-click="backToList()"> Atcelt </button>
+
+    </div>
+</div>
